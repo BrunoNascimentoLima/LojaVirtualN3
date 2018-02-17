@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"   >
+<ui:composition template="detalhe.xhtml">
+	<ui:define name="conteudo">
+
+		<h:form id="principal">
+			<p:panel header="Login">
+				<p:messages id="messages" showDetail="true" autoUpdate="true"
+					closable="true" value="${usuarioMB.mensagem}" />
+				<h:panelGrid columns="2">
+					<h:outputText value="Usuário:" />
+					<p:inputText name="txtUsuario" value="${usuarioMB.usuario.userId}"
+						label="Usuário" required="true" />
+					<h:outputText value="Senha:" />
+					<p:password name="txtPassword" value="${usuarioMB.usuario.password}"
+						label="Senha" required="true" />
+					<h:panelGroup>
+						<p:commandButton value="Login" action="${usuarioMB.logar()}"
+							update="principal" />
+					</h:panelGroup>
+					<h:panelGroup>
+						<p:commandButton id="cancela" value="cancela"
+							action="${usuarioMB.cancela()}" />
+					</h:panelGroup>
+				</h:panelGrid>
+			</p:panel>
+			<p:spacer height="20" />
+		</h:form>
+		<p:separator/>
+		<h:form>
+			<p:panel header="Não possui cadastro?" toggleable="true">
+				<p:commandButton id="cadastro" value="Cadastre-se aqui"
+					action="${usuarioMB.cadastro()}" />
+			</p:panel>
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

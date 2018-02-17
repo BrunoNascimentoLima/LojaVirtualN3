@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="detalhe.xhtml">
+	<ui:define name="conteudo">
+		<h:form id="formProduto">
+			<p:messages id="messages" showDetail="true" autoUpdate="true"
+				closable="true" value="${produtoMB.mensagem}" />
+			<p:panel header="Gestão Produto">
+				<h:panelGrid columns="8">
+					<h:outputLabel value="Nome:" />
+					<p:inputText id="nome" value="${produtoMB.produto.nome}"
+						label="Nome Produto" />
+
+
+					<h:outputLabel value="Descrição:" />
+					<p:inputText id="descricao" value="${produtoMB.produto.descricao}"
+						label="Descrição" />
+
+
+					<h:outputLabel value="Cidade:" />
+					<p:inputText id="cidade" value="${produtoMB.produto.cidade}"
+						label="Cidade" />
+
+
+					<h:outputLabel value="Estado:" />
+					<p:inputText id="estado" value="${produtoMB.produto.estado}"
+						label="Estado" />
+
+					<h:outputLabel value="País Origem:" />
+					<p:inputText id="pais" value="${produtoMB.produto.paisOrigem}"
+						label="País" />
+
+
+
+
+					<h:outputLabel value="Medida:" />
+					<p:inputText id="medida" value="${produtoMB.produto.medida}"
+						label="Medida" />
+
+					<h:outputLabel value="Unidade Medida:" />
+					<p:inputText id="unidade" value="${produtoMB.produto.unidMedida}"
+						label="UnidadeMedida" />
+
+
+					<h:outputLabel value="Preço:" />
+					<p:inputText id="preco" value="${produtoMB.produto.preco}"
+						label="Preço" />
+
+
+					<h:outputText value="Categoria: " />
+					<p:selectOneMenu value="#{produtoMB.categoria.nome}" effect="fade">
+						<f:selectItem itemLabel="Selecione " itemValue="" />
+						<f:selectItems value="#{produtoMB.categorias}" var="c"
+							itemLabel="#{c.nome}" itemValue="#{c.nome}" />
+					</p:selectOneMenu>
+
+					<h:panelGroup>
+						<p:commandButton id="pesquisar" value="Pesquisar"
+							action="${produtoMB.pesquisar()}" update="formProduto"
+							icon="ui-icon-search" />
+					</h:panelGroup>
+					<h:panelGroup>
+						<p:commandButton id="pesquisarPorCategoria"
+							value="Pesquisar por Categoria"
+							action="${produtoMB.pesquisarPorCategoria()}"
+							  name="cmd" update="formProduto" icon="ui-icon-search" />
+					</h:panelGroup>
+					<h:panelGroup>
+						<p:commandButton id="atualizar"
+							value="Atualizar Produto"
+							action="${produtoMB.atualizar()}"
+							  name="cmd" update="formProduto"  />
+					</h:panelGroup>
+					<h:panelGroup>
+					<p:commandButton id="voltar"
+							value="Voltar"
+							action="${administradorMB.voltar()}"
+							  name="cmd" update="formProduto"  />
+					</h:panelGroup>
+				
+				</h:panelGrid>
+				<h:panelGrid>
+				<p:graphicImage value="${produtoMB.imagem}"/> 
+				</h:panelGrid>
+			</p:panel>
+			<p:dataTable value="${produtoMB.produtos}" var="p" border="2"
+				rendered="${not empty produtoMB.produtos}">
+				<p:column>${p.id}
+	<f:facet name="header">ID</f:facet>
+					<f:facet name="footer">Total</f:facet>
+				</p:column>
+				<p:column>${p.nome}
+	<f:facet name="header">Nome</f:facet>
+				</p:column>
+
+				<p:column>${p.descricao}
+	<f:facet name="header">Descrição</f:facet>
+				</p:column>
+				<p:column>${p.cidade}
+	<f:facet name="header">Cidade</f:facet>
+				</p:column>
+				<p:column>${p.estado}
+	<f:facet name="header">Estado</f:facet>
+				</p:column>
+				<p:column>${p.paisOrigem}
+	<f:facet name="header">País Origem</f:facet>
+				</p:column>
+				<p:column>${p.medida}
+	<f:facet name="header">Medida</f:facet>
+				</p:column>
+				<p:column>${p.unidMedida}
+	<f:facet name="header">Unidad Medida</f:facet>
+				</p:column>
+				<p:column>${p.preco}
+	<f:facet name="header">Preço</f:facet>
+				</p:column>
+				<p:column>
+					<f:facet name="header">Ação</f:facet>
+					<h:commandLink action="${produtoMB.remover( p )}" value="remover"
+						update="formProduto" />
+	|
+	<h:commandLink action="${produtoMB.selecionar( p )}" value="selecionar"
+						update="formProduto" />
+				</p:column>
+
+			</p:dataTable>
+		</h:form>
+
+
+	</ui:define>
+</ui:composition>
+</html>

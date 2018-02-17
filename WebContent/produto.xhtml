@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="detalheUsu.xhtml">
+	<ui:define name="conteudo">
+		<p:panel header="Nossos Produtos">
+			<h:form id="formProduto">
+				<h:outputText value="Categoria: " />
+				<p:selectOneMenu value="#{produtoMB.categoria.nome}" effect="fade">
+					<f:selectItem itemLabel="Selecione " itemValue="" />
+					<f:selectItems value="#{produtoMB.categorias}" var="c"
+						itemLabel="#{c.nome}" itemValue="#{c.nome}" />
+				</p:selectOneMenu>
+				<h:panelGroup>
+					<p:commandButton id="pesquisarPorCategoria"
+						value="Pesquisar por Categoria"
+						action="${produtoMB.pesquisarPorCategoriaCompra()}" name="cmd"
+						icon="ui-icon-search" />
+				</h:panelGroup>
+
+			</h:form>
+			<h:form>
+				<p:fieldset legend="Produtos"
+					rendered="${not empty produtoMB.produtos}">
+
+					<p:dataGrid id="Produtos" var="p" value="#{produtoMB.produtos}"
+						columns="2">
+
+						<p:column>
+							<p:panel id="produto" header="#{p.nome}"
+								style="text-align:center">
+
+								<h:panelGrid columns="1" style="width:100%">
+
+									<h:outputText value="Nome:#{p.nome}" />
+									<h:outputText value="Descrição:#{p.descricao}" />
+									<h:outputText value="Cidade:#{p.cidade}" />
+									<h:outputText value="Estado:#{p.estado}" />
+									<h:outputText value="País:#{p.paisOrigem}" />
+									<h:outputText value="Preço:#{p.preco}" />
+                                      <p:separator/>
+                                      <p:commandLink value="Visualizar"
+                                      action="${produtoMB.visualizar(p)}"/>
+								</h:panelGrid>
+							</p:panel>
+
+							<p:draggable for="produto" revert="true"
+								handle=".ui-panel-titlebar" stack=".ui-panel" />
+
+						</p:column>
+						
+
+					</p:dataGrid>
+
+				</p:fieldset>
+
+			</h:form>
+
+
+		</p:panel>
+	</ui:define>
+</ui:composition>
+</html>

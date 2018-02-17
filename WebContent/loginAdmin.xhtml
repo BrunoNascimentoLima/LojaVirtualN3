@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="detalhe.xhtml">
+	<ui:define name="conteudo">
+			<p:panel header="Login Administrador">
+		<h:form id="loginAdmin">
+				<p:messages id="messages" showDetail="true" autoUpdate="true"
+					closable="true" value="${administradorMB.mensagem}" />
+				<h:panelGrid columns="2">
+					<h:outputText value="Administrador:*" />
+					<p:inputText name="txtAdmin"
+						value="${administradorMB.administrador.usuario}"
+						label="Administrador" required="true" />
+					<h:outputText value="Senha:*" />
+					<p:password name="txtSenha"
+						value="${administradorMB.administrador.senha}" label="Senha"
+						required="true" />
+					<h:panelGroup>
+						<p:commandButton value="Login"
+							action="${administradorMB.logarAdmin()}" update="loginAdmin" />
+					</h:panelGroup>
+
+				</h:panelGrid>
+			
+			<p:spacer height="20" />
+		</h:form>
+		<p:separator />
+		<h:form>
+			<h:panelGroup>
+				<p:commandButton id="cancela" value="cancela"
+					action="${administradorMB.cancela()}" />
+			</h:panelGroup>
+		</h:form>
+</p:panel>
+	</ui:define>
+</ui:composition>
+
+</html>

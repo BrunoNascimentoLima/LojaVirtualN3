@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"   >
+<ui:composition template="detalhe.xhtml">
+	<ui:define name="conteudo">
+	
+	<p:panel header="Cadastro Produto">
+	<h:form id="formProduto">
+	<p:messages id="message" showDetail="true" autoUpdate="true"
+				closable="true" value="${produtoMB.mensagem}" />
+			
+				<h:panelGrid columns="4">
+					
+					<h:outputLabel value="NomeProduto:*" />
+					<p:inputText id="nome" value="${produtoMB.produto.nome}"
+						required="true" label="Nome" />
+					
+					
+					<h:outputLabel value="Descrição:*" />
+					<p:inputText id="descricao" value="${produtoMB.produto.descricao}"
+						required="true" label="Descrição" />
+					
+					
+					<h:outputLabel value="Cidade:*" />
+					<p:inputText id="cidade"
+						value="${produtoMB.produto.cidade}" required="true"
+						label="Cidade" />
+					
+					<h:outputLabel value="Estado:*" />
+					<p:selectOneMenu id="estado"
+						value="${produtoMB.produto.estado}" required="true"
+						label="Estado">
+						<f:selectItem itemLabel="SP" itemValue="SP" />
+						<f:selectItem itemLabel="RJ" itemValue="RJ" />
+						<f:selectItem itemLabel="RS" itemValue="RS" />
+					</p:selectOneMenu>
+					
+					<h:outputLabel value="País:*" />
+					<p:selectOneMenu id="pais"
+						value="${produtoMB.produto.paisOrigem}" required="true"
+						label="País">
+						<f:selectItem itemLabel="Brasil" itemValue="Brasil" />
+						<f:selectItem itemLabel="EUA" itemValue="EUA" />
+						<f:selectItem itemLabel="Japão" itemValue="Japão" />
+						<f:selectItem itemLabel="Lapônia" itemValue="Lapônia" />
+					</p:selectOneMenu>
+					
+					
+					<h:outputLabel value="Medida:*" />
+					<p:inputText id="medida"
+						value="${produtoMB.produto.medida}" required="true"
+						label="Medida" />
+					
+					
+					<h:outputLabel value="Unidade:*" />
+					<p:selectOneMenu id="unidMedida"
+						value="${produtoMB.produto.unidMedida}" required="true"
+						label="Unidade de medida">
+						<f:selectItem itemLabel="g" itemValue="g" />
+						<f:selectItem itemLabel="mg" itemValue="mg" />
+						<f:selectItem itemLabel="kg" itemValue="kg" />
+						<f:selectItem itemLabel="ml" itemValue="ml" />
+						<f:selectItem itemLabel="l" itemValue="l" />
+					</p:selectOneMenu>
+					
+					<h:outputLabel value="Preço:*" />
+					<p:inputText id="preco"
+						value="${produtoMB.produto.preco}" required="true"
+						label="Preço" />
+					
+					
+					
+					<h:outputText value="Categoria: " />
+					<p:selectOneMenu value="#{produtoMB.categoria.nome}" effect="fade">
+						<f:selectItem itemLabel="Selecione " itemValue="" />
+						<f:selectItems value="#{produtoMB.categorias}" var="c"
+							itemLabel="#{c.nome}" itemValue="#{c.nome}" />
+					</p:selectOneMenu>
+					
+				</h:panelGrid>
+				<h:panelGrid columns="1">
+				<p:commandButton id="cadastrar" value="Cadastrar"
+				icon="ui-icon-disk"	action="${produtoMB.cadastrar()}" update="formProduto" />
+			</h:panelGrid>
+
+				<p:separator />
+
+					
+				
+	
+	
+  <h:outputLabel value="Foto:"/>
+    <p:fileUpload fileUploadListener="#{produtoMB.fotoProduto}"  
+            mode="advanced"  
+            update="messages"   
+            multiple="true"  
+            sizeLimit="100000"   
+            allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>  
+  
+    <p:growl id="messages" showDetail="true"/> 
+    
+    <p:graphicImage value="${produtoMB.imagem}"/> 
+   
+  
+</h:form>  
+       <p:separator/>          
+        <h:form>
+       <p:commandButton value="cancela" action="${produtoMB.cancela()}"/>
+        </h:form>         
+                    
+	</p:panel>
+
+	
+	
+	</ui:define>
+	</ui:composition>
+	
+</html>
